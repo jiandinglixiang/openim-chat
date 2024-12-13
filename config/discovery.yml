@@ -1,13 +1,13 @@
 enable: "etcd"
 etcd:
   rootDirectory: openim
-  address: [ host.docker.internal:12379 ]
+  address: [ localhost:12379 ]
   username: ''
   password: ''
 
 zookeeper:
   schema: openim
-  address: [ host.docker.internal:12181 ]
+  address: [ localhost:12181 ]
   username: ''
   password: ''
 
