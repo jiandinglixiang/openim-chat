@@ -1,4 +1,4 @@
-# How to add REST RPC API for OpenIM Chat
+# 为 OpenIM Chat 添加 REST RPC API
 </br>
 
 OpenIM Chat server works with the OpenIM Server to offer the powerfull IM service. It has many REST APIs which are called by the OpenIM Server, works as an Application Server to fullfill your system demands.

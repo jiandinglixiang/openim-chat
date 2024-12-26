@@ -1,4 +1,4 @@
-# Setting Up LiveKit Server for OpenIM Chat
+# LiveKit 服务器配置 for OpenIM Chat
 
 OpenIM Chat uses the LiveKit server as the media server to support video calls and video meeting services.
 

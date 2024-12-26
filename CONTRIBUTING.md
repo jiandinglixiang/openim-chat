@@ -1,4 +1,4 @@
-#  Contributing to Open-IM-Server
+#  为 Open-IM-Server 做贡献
 
 So, you want to hack on Open-IM-Server? Yay!
 
@@ -8,7 +8,7 @@ This document provides guidelines and best practices to help you contribute effe
 
 ## 📇Topics
 
-- [Contributing to Open-IM-Server](#contributing-to-open-im-server)
+- [为 Open-IM-Server 做贡献](#为-open-im-server-做贡献)
   - [📇Topics](#topics)
   - [What we expect of you](#what-we-expect-of-you)
   - [Code of ConductCode of Conduct](#code-of-conductcode-of-conduct)
