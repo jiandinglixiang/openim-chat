@@ -1,9 +1,9 @@
 # 为 OpenIM Chat 添加 REST RPC API
 </br>
 
-OpenIM Chat server works with the OpenIM Server to offer the powerfull IM service. It has many REST APIs which are called by the OpenIM Server, works as an Application Server to fullfill your system demands.
+OpenIM聊天服务器与OpenIM服务器配合提供强大的IM服务。它有许多由 OpenIM 服务器调用的 REST API，可作为应用程序服务器来满足您的系统需求。
 
-You can add your business extensions to the OpenIM Chat server by adding REST APIs and let the OpenIM Server call these extend APIs to fulfill your system demands. The following will show you how to add a REST API for it.
+您可以通过添加REST API将您的业务扩展添加到OpenIM聊天服务器，并让OpenIM服务器调用这些扩展API来满足您的系统需求。下面将向您展示如何为其添加 REST API。
 
 ## Protobuf source file modifications
 

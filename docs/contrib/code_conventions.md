@@ -1,6 +1,6 @@
-# Code conventions
+# 代码约定
 
-- [Code conventions](#code-conventions)
+- [代码约定](#代码约定)
   - [POSIX shell](#posix-shell)
   - [Go](#go)
   - [Directory and file conventions](#directory-and-file-conventions)

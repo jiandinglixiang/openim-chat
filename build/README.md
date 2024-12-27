@@ -1,6 +1,6 @@
 # Building OpenIM
 
-Building OpenIM is easy if you take advantage of the containerized build environment. This document will help guide you through understanding this build process.
+如果您利用容器化构建环境，构建 OpenIM 会很容易。本文档将帮助指导您了解此构建过程。
 
 ## Requirements
 
