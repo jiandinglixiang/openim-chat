@@ -1,13 +1,13 @@
 enable: "etcd"
 etcd:
   rootDirectory: openim
-  address: [ localhost:12379 ]
+  address: [ 47.108.26.241:12379 ]
   username: ''
   password: ''
 
 zookeeper:
   schema: openim
-  address: [ localhost:12181 ]
+  address: [ 47.108.26.241:12181 ]
   username: ''
   password: ''
 

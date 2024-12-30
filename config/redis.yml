@@ -1,9 +1,9 @@
 # List of Redis server addresses
-address: [ localhost:16379 ]
+address: [ 47.108.26.241:16379 ]
 # Username for Redis authentication (leave blank if not used)
 username: ''
 # Password for Redis authentication
-password: openIM123
+password: lihuaOpenIM123
 # Enable or disable pipeline processing
 enablePipeline: false
 # Enable or disable cluster mode
@@ -12,3 +12,10 @@ clusterMode: false
 db: 0
 # Maximum number of retry attempts for a failed connection
 maxRetry: 10
+
+dialTimeout: 5s   
+ # 连接超时时间
+readTimeout: 3s   
+ # 读取超时时间
+writeTimeout: 3s  
+ # 写入超时时间
