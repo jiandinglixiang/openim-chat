@@ -65,30 +65,30 @@ func Start(ctx context.Context, index int, config *Config) error {
 
 func SetChatRoute(router gin.IRouter, chat *Api, mw *chatmw.MW) {
 	account := router.Group("/account")
-	account.POST("/code/send", chat.SendVerifyCode)                      // Send verification code
-	account.POST("/code/verify", chat.VerifyCode)                        // Verify the verification code
-	account.POST("/register", mw.CheckAdminOrNil, chat.RegisterUser)     // Register
-	account.POST("/login", chat.Login)                                   // Login
-	account.POST("/password/reset", chat.ResetPassword)                  // Forgot password
-	account.POST("/password/change", mw.CheckToken, chat.ChangePassword) // Change password
+	account.POST("/code/send", chat.SendVerifyCode)                      // 发送验证码
+	account.POST("/code/verify", chat.VerifyCode)                        // 验证验证码
+	account.POST("/register", mw.CheckAdminOrNil, chat.RegisterUser)     // 登记
+	account.POST("/login", chat.Login)                                   // 登录
+	account.POST("/password/reset", chat.ResetPassword)                  // 忘记密码
+	account.POST("/password/change", mw.CheckToken, chat.ChangePassword) // 更改密码
 
 	user := router.Group("/user", mw.CheckToken)
-	user.POST("/update", chat.UpdateUserInfo)                 // Edit personal information
-	user.POST("/find/public", chat.FindUserPublicInfo)        // Get user's public information
-	user.POST("/find/full", chat.FindUserFullInfo)            // Get all information of the user
-	user.POST("/search/full", chat.SearchUserFullInfo)        // Search user's public information
-	user.POST("/search/public", chat.SearchUserPublicInfo)    // Search all information of the user
-	user.POST("/rtc/get_token", chat.GetTokenForVideoMeeting) // Get token for video meeting for the user
+	user.POST("/update", chat.UpdateUserInfo)                 // 编辑个人信息
+	user.POST("/find/public", chat.FindUserPublicInfo)        // 获取用户公开信息
+	user.POST("/find/full", chat.FindUserFullInfo)            // 获取用户所有信息
+	user.POST("/search/full", chat.SearchUserFullInfo)        // 查询用户公开信息
+	user.POST("/search/public", chat.SearchUserPublicInfo)    // 查询该用户的所有信息
+	user.POST("/rtc/get_token", chat.GetTokenForVideoMeeting) // 获取用户视频会议的令牌
 
 	router.POST("/friend/search", mw.CheckToken, chat.SearchFriend)
 
-	router.Group("/applet").POST("/find", mw.CheckToken, chat.FindApplet) // Applet list
+	router.Group("/applet").POST("/find", mw.CheckToken, chat.FindApplet) // 小程序列表
 
-	router.Group("/client_config").POST("/get", chat.GetClientConfig) // Get client initialization configuration
+	router.Group("/client_config").POST("/get", chat.GetClientConfig) // 获取客户端初始化配置
 
 	applicationGroup := router.Group("application")
 	applicationGroup.POST("/latest_version", chat.LatestApplicationVersion)
 	applicationGroup.POST("/page_versions", chat.PageApplicationVersion)
 
-	router.Group("/callback").POST("/open_im", chat.OpenIMCallback) // Callback
+	router.Group("/callback").POST("/open_im", chat.OpenIMCallback) // 打回来
 }

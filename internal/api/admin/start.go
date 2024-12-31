@@ -3,6 +3,7 @@ package admin
 import (
 	"context"
 	"fmt"
+
 	"github.com/gin-gonic/gin"
 	chatmw "github.com/openimsdk/chat/internal/api/mw"
 	"github.com/openimsdk/chat/internal/api/util"
@@ -66,14 +67,14 @@ func Start(ctx context.Context, index int, config *Config) error {
 func SetAdminRoute(router gin.IRouter, admin *Api, mw *chatmw.MW) {
 
 	adminRouterGroup := router.Group("/account")
-	adminRouterGroup.POST("/login", admin.AdminLogin)                                   // Login
-	adminRouterGroup.POST("/update", mw.CheckAdmin, admin.AdminUpdateInfo)              // Modify information
-	adminRouterGroup.POST("/info", mw.CheckAdmin, admin.AdminInfo)                      // Get information
-	adminRouterGroup.POST("/change_password", mw.CheckAdmin, admin.ChangeAdminPassword) // Change admin account's password
-	adminRouterGroup.POST("/add_admin", mw.CheckAdmin, admin.AddAdminAccount)           // Add admin account
-	adminRouterGroup.POST("/add_user", mw.CheckAdmin, admin.AddUserAccount)             // Add user account
-	adminRouterGroup.POST("/del_admin", mw.CheckAdmin, admin.DelAdminAccount)           // Delete admin
-	adminRouterGroup.POST("/search", mw.CheckAdmin, admin.SearchAdminAccount)           // Get admin list
+	adminRouterGroup.POST("/login", admin.AdminLogin)                                   // 登录
+	adminRouterGroup.POST("/update", mw.CheckAdmin, admin.AdminUpdateInfo)              // 修改信息
+	adminRouterGroup.POST("/info", mw.CheckAdmin, admin.AdminInfo)                      // 获取信息
+	adminRouterGroup.POST("/change_password", mw.CheckAdmin, admin.ChangeAdminPassword) // 更改管理员帐户的密码
+	adminRouterGroup.POST("/add_admin", mw.CheckAdmin, admin.AddAdminAccount)           // 添加管理员帐户
+	adminRouterGroup.POST("/add_user", mw.CheckAdmin, admin.AddUserAccount)             // 添加用户帐户
+	adminRouterGroup.POST("/del_admin", mw.CheckAdmin, admin.DelAdminAccount)           // 删除管理员
+	adminRouterGroup.POST("/search", mw.CheckAdmin, admin.SearchAdminAccount)           // 获取管理员列表
 	//account.POST("/add_notification_account")
 
 	importGroup := router.Group("/user/import")
@@ -87,50 +88,50 @@ func SetAdminRoute(router gin.IRouter, admin *Api, mw *chatmw.MW) {
 
 	defaultRouter := router.Group("/default", mw.CheckAdmin)
 	defaultUserRouter := defaultRouter.Group("/user")
-	defaultUserRouter.POST("/add", admin.AddDefaultFriend)       // Add default friend at registration
-	defaultUserRouter.POST("/del", admin.DelDefaultFriend)       // Delete default friend at registration
-	defaultUserRouter.POST("/find", admin.FindDefaultFriend)     // Default friend list
-	defaultUserRouter.POST("/search", admin.SearchDefaultFriend) // Search default friend list at registration
+	defaultUserRouter.POST("/add", admin.AddDefaultFriend)       // 注册时添加默认好友
+	defaultUserRouter.POST("/del", admin.DelDefaultFriend)       // 删除注册时的默认好友
+	defaultUserRouter.POST("/find", admin.FindDefaultFriend)     // 默认好友列表
+	defaultUserRouter.POST("/search", admin.SearchDefaultFriend) // 注册时搜索默认好友列表
 	defaultGroupRouter := defaultRouter.Group("/group")
-	defaultGroupRouter.POST("/add", admin.AddDefaultGroup)       // Add default group at registration
-	defaultGroupRouter.POST("/del", admin.DelDefaultGroup)       // Delete default group at registration
-	defaultGroupRouter.POST("/find", admin.FindDefaultGroup)     // Get default group list at registration
-	defaultGroupRouter.POST("/search", admin.SearchDefaultGroup) // Search default group list at registration
+	defaultGroupRouter.POST("/add", admin.AddDefaultGroup)       // 注册时添加默认组
+	defaultGroupRouter.POST("/del", admin.DelDefaultGroup)       // 删除注册时的默认组
+	defaultGroupRouter.POST("/find", admin.FindDefaultGroup)     // 注册时获取默认群组列表
+	defaultGroupRouter.POST("/search", admin.SearchDefaultGroup) // 注册时搜索默认群组列表
 
 	invitationCodeRouter := router.Group("/invitation_code", mw.CheckAdmin)
-	invitationCodeRouter.POST("/add", admin.AddInvitationCode)       // Add invitation code
-	invitationCodeRouter.POST("/gen", admin.GenInvitationCode)       // Generate invitation code
-	invitationCodeRouter.POST("/del", admin.DelInvitationCode)       // Delete invitation code
-	invitationCodeRouter.POST("/search", admin.SearchInvitationCode) // Search invitation code
+	invitationCodeRouter.POST("/add", admin.AddInvitationCode)       // 添加邀请码
+	invitationCodeRouter.POST("/gen", admin.GenInvitationCode)       // 生成邀请码
+	invitationCodeRouter.POST("/del", admin.DelInvitationCode)       // 删除邀请码
+	invitationCodeRouter.POST("/search", admin.SearchInvitationCode) // 搜索邀请码
 
 	forbiddenRouter := router.Group("/forbidden", mw.CheckAdmin)
 	ipForbiddenRouter := forbiddenRouter.Group("/ip")
-	ipForbiddenRouter.POST("/add", admin.AddIPForbidden)       // Add forbidden IP for registration/login
-	ipForbiddenRouter.POST("/del", admin.DelIPForbidden)       // Delete forbidden IP for registration/login
-	ipForbiddenRouter.POST("/search", admin.SearchIPForbidden) // Search forbidden IPs for registration/login
+	ipForbiddenRouter.POST("/add", admin.AddIPForbidden)       // 添加禁止注册/登录IP
+	ipForbiddenRouter.POST("/del", admin.DelIPForbidden)       // 删除禁止注册/登录的IP
+	ipForbiddenRouter.POST("/search", admin.SearchIPForbidden) // 搜索禁止的IP进行注册/登录
 	userForbiddenRouter := forbiddenRouter.Group("/user")
-	userForbiddenRouter.POST("/add", admin.AddUserIPLimitLogin)       // Add limit for user login on specific IP
-	userForbiddenRouter.POST("/del", admin.DelUserIPLimitLogin)       // Delete user limit on specific IP for login
-	userForbiddenRouter.POST("/search", admin.SearchUserIPLimitLogin) // Search limit for user login on specific IP
+	userForbiddenRouter.POST("/add", admin.AddUserIPLimitLogin)       // 添加限制特定IP的用户登录
+	userForbiddenRouter.POST("/del", admin.DelUserIPLimitLogin)       // 删除特定IP登录的用户限制
+	userForbiddenRouter.POST("/search", admin.SearchUserIPLimitLogin) // 特定IP的用户登录搜索限制
 
 	appletRouterGroup := router.Group("/applet", mw.CheckAdmin)
-	appletRouterGroup.POST("/add", admin.AddApplet)       // Add applet
-	appletRouterGroup.POST("/del", admin.DelApplet)       // Delete applet
-	appletRouterGroup.POST("/update", admin.UpdateApplet) // Modify applet
-	appletRouterGroup.POST("/search", admin.SearchApplet) // Search applet
+	appletRouterGroup.POST("/add", admin.AddApplet)       // 添加小程序
+	appletRouterGroup.POST("/del", admin.DelApplet)       // 删除小程序
+	appletRouterGroup.POST("/update", admin.UpdateApplet) // 修改小程序
+	appletRouterGroup.POST("/search", admin.SearchApplet) // 搜索小程序
 
 	blockRouter := router.Group("/block", mw.CheckAdmin)
-	blockRouter.POST("/add", admin.BlockUser)          // Block user
-	blockRouter.POST("/del", admin.UnblockUser)        // Unblock user
-	blockRouter.POST("/search", admin.SearchBlockUser) // Search blocked users
+	blockRouter.POST("/add", admin.BlockUser)          // 阻止用户
+	blockRouter.POST("/del", admin.UnblockUser)        // 解锁用户
+	blockRouter.POST("/search", admin.SearchBlockUser) // 搜索被阻止的用户
 
 	userRouter := router.Group("/user", mw.CheckAdmin)
-	userRouter.POST("/password/reset", admin.ResetUserPassword) // Reset user password
+	userRouter.POST("/password/reset", admin.ResetUserPassword) // 重置用户密码
 
 	initGroup := router.Group("/client_config", mw.CheckAdmin)
-	initGroup.POST("/get", admin.GetClientConfig) // Get client initialization configuration
-	initGroup.POST("/set", admin.SetClientConfig) // Set client initialization configuration
-	initGroup.POST("/del", admin.DelClientConfig) // Delete client initialization configuration
+	initGroup.POST("/get", admin.GetClientConfig) // 获取客户端初始化配置
+	initGroup.POST("/set", admin.SetClientConfig) // 设置客户端初始化配置
+	initGroup.POST("/del", admin.DelClientConfig) // 删除客户端初始化配置
 
 	statistic := router.Group("/statistic", mw.CheckAdmin)
 	statistic.POST("/new_user_count", admin.NewUserCount)
