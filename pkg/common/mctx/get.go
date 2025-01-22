@@ -31,29 +31,29 @@ func HaveOpUser(ctx context.Context) bool {
 }
 
 func Check(ctx context.Context) (string, int32, error) {
-	opUserIDVal := ctx.Value(constant.RpcOpUserID)
-	opUserID, ok := opUserIDVal.(string)
-	if !ok {
-		return "", 0, errs.ErrNoPermission.WrapMsg("no opUserID")
+	opUserIDVal := ctx.Value(constant.RpcOpUserID) // 从上下文中获取操作用户ID的值
+	opUserID, ok := opUserIDVal.(string)           // 将获取到的值转换为字符串类型
+	if !ok {                                       // 如果转换失败
+		return "", 0, errs.ErrNoPermission.WrapMsg("no opUserID") // 返回错误信息，表示没有操作用户ID
 	}
-	if opUserID == "" {
-		return "", 0, errs.ErrNoPermission.WrapMsg("opUserID empty")
+	if opUserID == "" { // 如果操作用户ID为空
+		return "", 0, errs.ErrNoPermission.WrapMsg("opUserID empty") // 返回错误信息，表示操作用户ID为空
 	}
-	opUserTypeArr, ok := ctx.Value(constant.RpcOpUserType).([]string)
-	if !ok {
-		return "", 0, errs.ErrNoPermission.WrapMsg("missing user type")
+	opUserTypeArr, ok := ctx.Value(constant.RpcOpUserType).([]string) // 从上下文中获取操作用户类型的值，并转换为字符串切片
+	if !ok {                                                          // 如果转换失败
+		return "", 0, errs.ErrNoPermission.WrapMsg("missing user type") // 返回错误信息，表示缺少用户类型
 	}
-	if len(opUserTypeArr) == 0 {
-		return "", 0, errs.ErrNoPermission.WrapMsg("user type empty")
+	if len(opUserTypeArr) == 0 { // 如果用户类型数组为空
+		return "", 0, errs.ErrNoPermission.WrapMsg("user type empty") // 返回错误信息，表示用户类型为空
 	}
-	userType, err := strconv.Atoi(opUserTypeArr[0])
-	if err != nil {
-		return "", 0, errs.ErrNoPermission.WrapMsg("user type invalid " + err.Error())
+	userType, err := strconv.Atoi(opUserTypeArr[0]) // 将用户类型的第一个元素转换为整数
+	if err != nil {                                 // 如果转换失败
+		return "", 0, errs.ErrNoPermission.WrapMsg("user type invalid " + err.Error()) // 返回错误信息，表示用户类型无效，并附加错误信息
 	}
-	if !(userType == constant.AdminUser || userType == constant.NormalUser) {
-		return "", 0, errs.ErrNoPermission.WrapMsg("user type invalid")
+	if !(userType == constant.AdminUser || userType == constant.NormalUser) { // 如果用户类型既不是管理员也不是普通用户
+		return "", 0, errs.ErrNoPermission.WrapMsg("user type invalid") // 返回错误信息，表示用户类型无效
 	}
-	return opUserID, int32(userType), nil
+	return opUserID, int32(userType), nil // 返回操作用户ID和用户类型
 }
 
 func CheckAdmin(ctx context.Context) (string, error) {
